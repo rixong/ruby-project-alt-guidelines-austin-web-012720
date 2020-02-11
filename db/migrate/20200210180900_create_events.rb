@@ -5,6 +5,7 @@ class CreateEvents < ActiveRecord::Migration[5.2]
       t.string :date
       t.string :category
       t.string :event_id_num
+      t.boolean :is_free
       t.string :description
     end
   end

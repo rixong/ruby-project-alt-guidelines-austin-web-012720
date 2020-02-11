@@ -17,6 +17,7 @@ ActiveRecord::Schema.define(version: 2020_02_10_192517) do
     t.string "date"
     t.string "category"
     t.string "event_id_num"
+    t.boolean "is_free"
     t.string "description"
   end
 
@@ -29,8 +30,8 @@ ActiveRecord::Schema.define(version: 2020_02_10_192517) do
   create_table "users", force: :cascade do |t|
     t.string "first_name"
     t.string "last_name"
-    t.integer "age"
-    t.string "gender"
+    t.string "email_address"
+    t.string "password"
   end
 
 end
