@@ -1,22 +1,13 @@
-
-
 class CommandLineInterface
     def run
-        greet
-        login_or_create_user
-        
-        # check_for_user
-        # login or create new user
-        # make Login function that asks them for their username and password
-        # If they've never logged in before, then create user
+        User.greet
+        User.login_or_create_user
     end
+end
 
-    def greet
-        puts '
-        Do512 - "Do awesome stuff in Austin"
-        '
-    end
-
+<<<<<<< HEAD
+# TEST TO UPLOAD TO GITHUB - JESSICA
+=======
     def login_or_create_user
         puts 'Make a selection:
         1. Returning User - Login
@@ -162,3 +153,4 @@ def choose_by_date
 
 
 # end
+>>>>>>> 1fd9b0d249eb9eeae170aa9c81a3a5a19ba74849
