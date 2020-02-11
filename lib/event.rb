@@ -15,10 +15,14 @@ class Event < ActiveRecord::Base
     
   end
 
+
+# When someone chooses an 
+=======
   def self.all_users_events
     events = Event.all.sort { | a,b | a.date <=> b.date }
     events.each
   end
+
 
 end
 
