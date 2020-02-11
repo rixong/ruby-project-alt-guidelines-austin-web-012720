@@ -42,17 +42,18 @@ class User < ActiveRecord::Base
           User.enter_password
       end
   end
-def self.create_user # Move to User class, first_name, last_name, email_address_password
-  puts "Enter your first name:"
-      first_name = gets.chomp     
-  puts "Enter your last name:"
-      last_name = gets.chomp
-  puts "Enter your email:"
-      email = gets.chomp 
-  puts "Enter a password:"
-      password = gets.chomp
-  user = User.create(first_name: first_name, last_name: last_name, email_address: email, password: password)
-  puts "Saved! Welcome to Do512"
-  return user
-end
+
+  def self.create_user
+    puts "Enter your first name:"
+        first_name = gets.chomp     
+    puts "Enter your last name:"
+        last_name = gets.chomp
+    puts "Enter your email:"
+        email = gets.chomp 
+    puts "Enter a password:"
+        password = gets.chomp
+    user = User.create(first_name: first_name, last_name: last_name, email_address: email, password: password)
+    puts "Saved! Welcome to Do512"
+    return user
+  end
 end

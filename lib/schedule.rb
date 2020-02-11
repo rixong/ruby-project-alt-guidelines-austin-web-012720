@@ -4,7 +4,7 @@ class Schedule < ActiveRecord::Base
 
 
   def self.print_user_schedule (user)
-    binding.pry      ## sorted by date
+      ## sorted by date
     schedules = user.schedules
     schedules = schedules.sort { |a,b| a.event.date <=> b.event.date }
     schedules.each do |schedule|
