@@ -11,7 +11,9 @@ class Event < ActiveRecord::Base
     end
   end
 
-  
+  def self.event_users
+    
+  end
 
   def self.all_users_events
     events = Event.all.sort { | a,b | a.date <=> b.date }
