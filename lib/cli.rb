@@ -1,15 +1,50 @@
 class CommandLineInterface
     attr_accessor :cur_user
+
     def initialize
         @cur_user = nil
     end
 
     def run
-        User.greet
+        greet
         @cur_user = User.login_or_create_user
   
         puts " Hi #{cur_user.first_name} #{cur_user.last_name} !"
+        menu
+    end
+
+    def greet
+        puts "\n\nDo512 - \"Do awesome stuff in Austin\"\n".colorize(:yellow ).colorize( :background => :light_blue)
+    end
+
+    def menu
+        puts "What would you like to do?
+        1. See events by date
+        2. Print my schedule
+        3. List all users
+        4. Settings
+        5. Exit Program"
+        response = gets.chomp
+    case 
+      when response == "1"
         choose_by_date
+      when response == "2"
+        puts "print_my_schedule method TBD"
+      when response == "3"
+        list_all_users(users)
+      when response == "4"
+        puts "Select an item to update:
+        1. New email
+        2. New password"
+        answer = gets.chomp
+        if answer == "1" 
+            update_email
+        else 
+            update_password
+        end
+      else
+        "Invalid Entry. Enter a number."
+      end
     end
 
   def choose_by_date
@@ -26,9 +61,27 @@ class CommandLineInterface
     index = gets.chomp.to_i - 1
     new_event = Event.make_event(result[index])
     Schedule.create(date: date, event_id: new_event.id, user_id: User.cur_user.id)
-
    end
 
+   def list_all_users(users)
+    puts "reached list_all_users metjod in cli.rb"
+    # User.each_with_index do |user, index|
+    #     puts "#{index + 1}. #{user.first_name} #{user.last_name}"
+    #   end
+   end
 
+   def update_email
+    puts "Enter your new email address:"
+    email = gets.chomp
+    cur_user.email_address = email
+    puts "Email address updated!"
+    menu
+   end
+
+   def update_password
+    password = IO::console.getpass "Enter your new password:"
+    cur_user.password = password
+    puts "Your new password is #{password.length} characters long."
+    menu
+   end
 end
-

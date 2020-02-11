@@ -2,11 +2,6 @@ class User < ActiveRecord::Base
   has_many :schedules
   has_many :events, through: :schedules
   
-  def self.greet
-    puts '
-    Do512 - "Do awesome stuff in Austin"
-    '
-  end
   def self.login_or_create_user
     puts 'Make a selection:
     1. Returning User - Login
@@ -35,7 +30,6 @@ class User < ActiveRecord::Base
     puts "Enter your password:"
     password = gets.chomp
       if user.password == password
-          puts "Welcome back!"
           return user
       else
       puts "Error: Invalid Password"
@@ -50,8 +44,10 @@ class User < ActiveRecord::Base
         last_name = gets.chomp
     puts "Enter your email:"
         email = gets.chomp 
-    puts "Enter a password:"
-        password = gets.chomp
+    password = IO::console.getpass "Enter a password:"
+    # cur_user.password = password
+    puts "Your password is #{password.length} characters long."
+        
     user = User.create(first_name: first_name, last_name: last_name, email_address: email, password: password)
     puts "Saved! Welcome to Do512"
     return user
