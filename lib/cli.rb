@@ -18,12 +18,13 @@ class CommandLineInterface
     end
 
     def menu
-        puts "What would you like to do?
+        puts "\nWhat would you like to do?".colorize(:green)
+        puts "
         1. See events by date
         2. Print my schedule
         3. List all users
         4. Settings
-        5. Exit Program"
+        5. Exit Program".colorize(:blue)
         response = gets.chomp
     case 
       when response == "1"
@@ -38,9 +39,10 @@ class CommandLineInterface
         2. New password"
         answer = gets.chomp
         if answer == "1" 
-            update_email
+            binding.pry
+            cur_user.update_email
         else 
-            update_password
+            cur_user.update_password
         end
       else
         "Invalid Entry. Enter a number."
@@ -70,18 +72,5 @@ class CommandLineInterface
     #   end
    end
 
-   def update_email
-    puts "Enter your new email address:"
-    email = gets.chomp
-    cur_user.email_address = email
-    puts "Email address updated!"
-    menu
-   end
-
-   def update_password
-    password = IO::console.getpass "Enter your new password:"
-    cur_user.password = password
-    puts "Your new password is #{password.length} characters long."
-    menu
-   end
+  
 end

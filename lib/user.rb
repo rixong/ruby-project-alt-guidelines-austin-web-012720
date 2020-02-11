@@ -1,4 +1,5 @@
 class User < ActiveRecord::Base
+
   has_many :schedules
   has_many :events, through: :schedules
   
@@ -52,4 +53,20 @@ class User < ActiveRecord::Base
     puts "Saved! Welcome to Do512"
     return user
   end
+
+  def update_email
+    puts "Enter your new email address:"
+    email = gets.chomp
+    email_address = email
+    puts "Email address updated!"
+    menu
+   end
+
+   def update_password
+    password = IO::console.getpass "Enter your new password:"
+    cur_user.password = password
+    puts "Your new password is #{password.length} characters long."
+    menu
+   end
+
 end
