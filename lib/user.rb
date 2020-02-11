@@ -6,6 +6,4 @@ class User < ActiveRecord::Base
     User.find(2)
   end
 
-
-
 end
