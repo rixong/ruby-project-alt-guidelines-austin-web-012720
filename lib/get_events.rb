@@ -1,7 +1,7 @@
 class GetEvents
 
   attr_reader :title, :category, :description, :date, :time, :is_free, :permalink
-
+#comment for git
   def initialize(title, category, description, date, time, is_free, permalink)
     @title = title
     @category = category
