@@ -3,8 +3,9 @@ class Schedule < ActiveRecord::Base
   belongs_to :event
 
 
-  def self.print_user_schedules       ## sorted by date
-    schedules = User.cur_user.schedules
+  def self.print_user_schedule (user)
+      ## sorted by date
+    schedules = user.schedules
     schedules = schedules.sort { |a,b| a.event.date <=> b.event.date }
     schedules.each do |schedule|
       puts "#{schedule.event.date} - #{schedule.event.title}"
