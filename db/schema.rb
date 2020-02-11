@@ -16,9 +16,7 @@ ActiveRecord::Schema.define(version: 2020_02_10_192517) do
     t.string "title"
     t.string "date"
     t.string "category"
-    t.string "event_id_num"
-    t.boolean "is_free"
-    t.string "description"
+    t.string "permalink"
   end
 
   create_table "schedules", force: :cascade do |t|
