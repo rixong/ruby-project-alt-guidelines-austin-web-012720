@@ -3,7 +3,7 @@ class User < ActiveRecord::Base
   has_many :events, through: :schedules
 
   def self.cur_user 
-    User.find(1)
+    User.find(2)
   end
 
   def self.greet
