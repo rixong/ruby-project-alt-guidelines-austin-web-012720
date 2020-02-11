@@ -25,7 +25,6 @@ def choose_by_date
   puts "\nEnter a number to schedule an event:"
   index = gets.chomp.to_i - 1
   new_event = Event.make_event(result[index])
-  # binding.pry
   Schedule.create(date: date, event_id: new_event.id, user_id: User.cur_user.id)
 
  end
