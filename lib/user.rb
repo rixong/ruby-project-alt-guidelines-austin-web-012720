@@ -70,9 +70,16 @@ class User < ActiveRecord::Base
     puts "Your new password is #{password.length} characters long."
    end
 
-   def delete_user(cur_user)
-    binding.pry
-     User.delete(cur_user.id)
+   def self.delete_user(cur_user)
+    User.delete(cur_user)
+    puts "Deleted current user"
+   end
+
+   def self.list_users
+    puts "\nAll Registered Users\n"
+    User.all.each.with_index(1) do |user, index|
+      puts "#{index}. #{user.first_name} #{user.last_name}"
+    end
    end
 
 end
