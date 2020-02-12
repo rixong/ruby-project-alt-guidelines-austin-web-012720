@@ -4,7 +4,7 @@ class CreateEvents < ActiveRecord::Migration[5.2]
       t.string :title
       t.string :date
       t.string :category
-      t.string :permalink
+      t.integer :api_id
     end
   end
 end
