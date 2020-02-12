@@ -5,14 +5,24 @@ class Event < ActiveRecord::Base
 
   def self.make_event(event)  ## only creates new event if doesn't already exist locally (Event table).
     if !Event.find_by(api_id: event.api_id)
+      puts "making event."
       Event.create(title: event.title, date: event.date, category: event.category, api_id: event.api_id)
     else
+      puts "(event already exists...)"
       Event.find_by(api_id: event.api_id)
     end
   end
 
   def get_event_info(id)
     GetEvents.find_by_api_id(id)
+  end
+
+  def self.get_event_id_from_api_id(api_id)
+   if result = Event.find_by(api_id: api_id)
+    return result.id
+   else
+    return nil
+   end
   end
 
   # def self.all_users_all_events
