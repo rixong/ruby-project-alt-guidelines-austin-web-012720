@@ -16,7 +16,7 @@ ActiveRecord::Schema.define(version: 2020_02_10_192517) do
     t.string "title"
     t.string "date"
     t.string "category"
-    t.string "permalink"
+    t.integer "api_id"
   end
 
   create_table "schedules", force: :cascade do |t|

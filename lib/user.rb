@@ -1,12 +1,7 @@
 class User < ActiveRecord::Base
   has_many :schedules
   has_many :events, through: :schedules
-  
-  def self.greet
-    puts '
-    Do512 - "Do awesome stuff in Austin"
-    '
-  end
+
   def self.login_or_create_user
     puts 'Make a selection:
     1. Returning User - Login
@@ -56,4 +51,5 @@ class User < ActiveRecord::Base
     puts "Saved! Welcome to Do512"
     return user
   end
+
 end
