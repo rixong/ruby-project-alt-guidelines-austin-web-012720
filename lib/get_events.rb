@@ -27,11 +27,6 @@ class GetEvents
     pattern.match(date)
   end
 
-  # if !GetEvents.date_validation(date)  ## Validation  add to CLI
-  #   puts "Incorrect format."
-  #   choose_by_date
-  # end
-
   def self.get_api_by_id(api_id)  
     response_body = import_events_from_api(api_id)  
     event = JSON.parse(response_body)["event"]  ## returns the single event
@@ -47,7 +42,7 @@ class GetEvents
   def self.show_more_info(event)
     puts "Title: #{event.title}"
     puts "Category: #{event.category}"
-    puts "Description: #{event.description}"
+    puts "Description: #{event.description}\n\n"
   end
   
 ### HELPER METHODS

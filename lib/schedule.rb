@@ -2,7 +2,6 @@ class Schedule < ActiveRecord::Base
   belongs_to :user
   belongs_to :event
 
-  
 
   def self.make_schedule(date, new_event, cur_user)  ## new_event is from date, result of cli search of date, cur_user is User object
     event_id = Event.get_event_id_from_api_id(new_event.api_id)

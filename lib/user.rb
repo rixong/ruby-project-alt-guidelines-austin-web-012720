@@ -1,6 +1,8 @@
+require "tty-prompt"
+
 class User < ActiveRecord::Base
 
-  has_many :schedules
+  has_many :schedules, :dependent => :delete_all
   has_many :events, through: :schedules
 
   def self.login_or_create_user
@@ -28,13 +30,14 @@ class User < ActiveRecord::Base
     end
 
   def self.enter_password(user)
-    puts "Enter your password:"
-    password = gets.chomp
+    prompt = TTY::Prompt.new
+    password = prompt.mask("Enter password:")
       if user.password == password
+          puts "correct password"
           return user
       else
       puts "Error: Invalid Password"
-          User.enter_password
+          User.enter_password(user)
       end
   end
 
@@ -44,30 +47,39 @@ class User < ActiveRecord::Base
     puts "Enter your last name:"
         last_name = gets.chomp
     puts "Enter your email:"
-        email = gets.chomp 
-    password = IO::console.getpass "Enter a password:"
-    # cur_user.password = password
-    puts "Your password is #{password.length} characters long."
-        
+        email = gets.chomp
+        prompt = TTY::Prompt.new 
+    password = prompt.mask("Enter a password:")  
     user = User.create(first_name: first_name, last_name: last_name, email_address: email, password: password)
     puts "Saved! Welcome to Do512"
     return user
   end
 
-
-  def update_email
+  def self.update_email(cur_user)
     puts "Enter your new email address:"
     email = gets.chomp
-    email_address = email
+    cur_user.update(email_address: email)
     puts "Email address updated!"
-    menu
+    
    end
 
-   def update_password
-    password = IO::console.getpass "Enter your new password:"
+   def self.update_password(cur_user)
+    prompt = TTY::Prompt.new
+    password = prompt.mask("Enter a new password:")
     cur_user.password = password
     puts "Your new password is #{password.length} characters long."
-    menu
+   end
+
+   def self.delete_user(cur_user)
+    User.delete(cur_user)
+    puts "Deleted current user"
+   end
+
+   def self.list_users
+    puts "\nAll Registered Users\n"
+    User.all.each.with_index(1) do |user, index|
+      puts "#{index}. #{user.first_name} #{user.last_name}"
+    end
    end
 
 end
