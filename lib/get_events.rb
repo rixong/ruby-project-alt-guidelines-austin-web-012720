@@ -74,27 +74,8 @@ class GetEvents
   end
 
 
-#   def search_by 
-#     puts "What would you like to see?
 
-#      1. Events by date (MM/DD)
-#      2. Show only Freebies!"
-#         answer = gets.chomp
-#     if answer == "1"
-#         find_by_date
-#     else 
-#         only_freebies 
-#     end
-# end
 
-#  def only_freebies
-#   puts "Made it to only_freebies!"
-# #         Event.all.each.with_index(1) do |event, index|
-# #             if event.is_free == true
-# #             puts "#{index}. #{event.title}" # why won't the index start at 1 ?
-# #             end
-# #         end
-# end
 
 
 end
