@@ -2,7 +2,7 @@ require "tty-prompt"
 
 class User < ActiveRecord::Base
 
-  has_many :schedules
+  has_many :schedules, :dependent => :delete_all
   has_many :events, through: :schedules
 
   def self.login_or_create_user
@@ -31,13 +31,18 @@ class User < ActiveRecord::Base
 
   def self.enter_password(user)
     prompt = TTY::Prompt.new
+<<<<<<< HEAD
     password = prompt.mask("Enter your password:")
  
+=======
+    password = prompt.mask("Enter password:")
+>>>>>>> 0676c41685786a6b72b2291f2941cc78a30e76a0
       if user.password == password
+          puts "correct password"
           return user
       else
       puts "Error: Invalid Password"
-          User.enter_password
+          User.enter_password(user)
       end
   end
 
@@ -47,6 +52,7 @@ class User < ActiveRecord::Base
     puts "Enter your last name:"
         last_name = gets.chomp
     puts "Enter your email:"
+<<<<<<< HEAD
         email = gets.chomp 
         prompt = TTY::Prompt.new
     password = prompt.mask("Enter your password:")
@@ -54,25 +60,51 @@ class User < ActiveRecord::Base
     # cur_user.password = password
     puts "Your password is #{password.length} characters long."
         
+=======
+        email = gets.chomp
+        prompt = TTY::Prompt.new 
+    password = prompt.mask("Enter a password:")  
+>>>>>>> 0676c41685786a6b72b2291f2941cc78a30e76a0
     user = User.create(first_name: first_name, last_name: last_name, email_address: email, password: password)
     puts "Saved! Welcome to Do512"
     return user
   end
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 0676c41685786a6b72b2291f2941cc78a30e76a0
   def self.update_email(cur_user)
     puts "Enter your new email address:"
     email = gets.chomp
     cur_user.update(email_address: email)
     puts "Email address updated!"
+<<<<<<< HEAD
     # menu
    end
 
    def update_password
+=======
+    
+   end
+
+   def self.update_password(cur_user)
+>>>>>>> 0676c41685786a6b72b2291f2941cc78a30e76a0
     prompt = TTY::Prompt.new
     password = prompt.mask("Enter a new password:")
     cur_user.password = password
     puts "Your new password is #{password.length} characters long."
-    menu
+   end
+
+   def self.delete_user(cur_user)
+    User.delete(cur_user)
+    puts "Deleted current user"
+   end
+
+   def self.list_users
+    puts "\nAll Registered Users\n"
+    User.all.each.with_index(1) do |user, index|
+      puts "#{index}. #{user.first_name} #{user.last_name}"
+    end
    end
 end
