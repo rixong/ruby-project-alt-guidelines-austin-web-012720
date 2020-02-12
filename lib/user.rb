@@ -2,7 +2,7 @@ class User < ActiveRecord::Base
 
   has_many :schedules
   has_many :events, through: :schedules
-  
+
   def self.login_or_create_user
     puts 'Make a selection:
     1. Returning User - Login
@@ -54,6 +54,7 @@ class User < ActiveRecord::Base
     return user
   end
 
+
   def update_email
     puts "Enter your new email address:"
     email = gets.chomp
@@ -68,4 +69,5 @@ class User < ActiveRecord::Base
     puts "Your new password is #{password.length} characters long."
     menu
    end
+
 end
