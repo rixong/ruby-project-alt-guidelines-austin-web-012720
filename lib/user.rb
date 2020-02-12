@@ -1,3 +1,5 @@
+require "tty-prompt"
+
 class User < ActiveRecord::Base
 
   has_many :schedules
@@ -28,8 +30,9 @@ class User < ActiveRecord::Base
     end
 
   def self.enter_password(user)
-    puts "Enter your password:"
-    password = gets.chomp
+    prompt = TTY::Prompt.new
+    password = prompt.mask("Enter your password:")
+ 
       if user.password == password
           return user
       else
@@ -45,7 +48,9 @@ class User < ActiveRecord::Base
         last_name = gets.chomp
     puts "Enter your email:"
         email = gets.chomp 
-    password = IO::console.getpass "Enter a password:"
+        prompt = TTY::Prompt.new
+    password = prompt.mask("Enter your password:")
+    # password = IO::console.getpass "Enter a password:"
     # cur_user.password = password
     puts "Your password is #{password.length} characters long."
         
@@ -64,10 +69,10 @@ class User < ActiveRecord::Base
    end
 
    def update_password
-    password = IO::console.getpass "Enter your new password:"
+    prompt = TTY::Prompt.new
+    password = prompt.mask("Enter a new password:")
     cur_user.password = password
     puts "Your new password is #{password.length} characters long."
     menu
    end
-
 end

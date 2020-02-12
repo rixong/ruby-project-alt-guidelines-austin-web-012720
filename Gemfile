@@ -8,4 +8,11 @@ gem "pry"
 gem "require_all"
 gem "faker"
 gem "colorize"
+gem "tty-prompt"
 
+
+
+
+# formatador
+
+# prompt tty
