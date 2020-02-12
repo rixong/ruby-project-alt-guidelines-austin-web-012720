@@ -68,5 +68,4 @@ class User < ActiveRecord::Base
     puts "Your new password is #{password.length} characters long."
     menu
    end
-
 end

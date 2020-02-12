@@ -71,6 +71,4 @@ class CommandLineInterface
     #     puts "#{index + 1}. #{user.first_name} #{user.last_name}"
     #   end
    end
-
-  
 end
