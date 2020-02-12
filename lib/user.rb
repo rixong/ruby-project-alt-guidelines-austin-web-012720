@@ -60,12 +60,12 @@ class User < ActiveRecord::Base
   end
 
 
-  def update_email
+  def self.update_email(cur_user)
     puts "Enter your new email address:"
     email = gets.chomp
-    email_address = email
+    cur_user.update(email_address: email)
     puts "Email address updated!"
-    menu
+    # menu
    end
 
    def update_password
