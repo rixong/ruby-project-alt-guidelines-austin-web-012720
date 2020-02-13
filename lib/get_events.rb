@@ -38,17 +38,18 @@ class GetEvents
     package_events(event)
   end
   
-  def self.list_event_titles(events)
+  def self.list_event_titles(events, date)
+    puts "\nHere are the events for #{date}:".colorize(:green)
     events.each_with_index do |event, index|
       puts "#{index + 1}. #{event.category} - #{event.title}"
     end
   end
 
   def self.show_more_info(event)
-    puts "\nTitle:  ".colorize(:cyan) + "#{event.title}".colorize(:light_blue)
-    puts "\nCategory  :".colorize(:cyan) + "#{event.category}".colorize(:light_blue)
-    puts "\nStart Time  :".colorize(:cyan) + "#{event.time}".colorize(:light_blue)
-    puts "\nDescription  :".colorize(:cyan) + "#{event.description}\n\n".colorize(:light_blue)
+    puts "\nTitle: ".colorize(:yellow) + "#{event.title}".colorize(:green)
+    puts "\nCategory: ".colorize(:yellow) + "#{event.category}".colorize(:green)
+    puts "\nStart Time: ".colorize(:yellow) + "#{event.time}".colorize(:green)
+    puts "\nDescription: ".colorize(:yellow) + "#{event.description}\n\n".colorize(:green)
   end
   
 ### HELPER METHODS
