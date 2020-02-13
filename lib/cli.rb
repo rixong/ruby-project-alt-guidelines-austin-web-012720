@@ -27,17 +27,17 @@ class CommandLineInterface
       4. Settings
       5. Exit Program".colorize(:blue)
       response = gets.chomp
-        case 
-          when response == "1"
+        case response
+          when "1"
             choose_by_date_menu
-          when response == "2"
+          when "2"
             schedule_menu
-          when response == "3"
+          when "3"
             list_all_users_menu
-          when response == "4"
+          when "4"
             settings_menu
-          when response == "5"
-           exit_prompt
+          when "5"
+            exit_prompt
           else
             main_menu
         end
@@ -65,11 +65,11 @@ class CommandLineInterface
     2. View more events
     M - Main Menu"
     answer = gets.chomp
-    case 
-    when answer == "1"
+    case answer
+    when "1"
       Schedule.make_schedule(date, result[index], cur_user)
       main_menu
-    when answer == "2"
+    when "2"
       choose_by_date_menu
     else
       main_menu
@@ -108,14 +108,14 @@ class CommandLineInterface
     3. Delete User
     M - Main Menu"
     answer = gets.chomp
-    case  
-      when answer == "1" 
+    case  answer
+      when "1" 
         puts "choice 1"
           User.update_email(cur_user)
-      when answer == "2"
+      when "2"
         puts "choice 2"
           User.update_password(cur_user)
-      when answer == "3"
+      when "3"
         puts "choice 3"
         puts "Are you sure you want to delete this user? (Y/N)"
         choice = gets.chomp
