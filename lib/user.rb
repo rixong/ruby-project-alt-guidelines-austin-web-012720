@@ -6,10 +6,10 @@ class User < ActiveRecord::Base
   has_many :events, through: :schedules
 
   def self.login_or_create_user
-    puts 'Make a selection:
+    puts "\nMake a selection:
     1. Returning User - Login
     2. New User - Create Profile
-    '
+    "
     selection = gets.chomp
     if selection == "1" 
         User.enter_email

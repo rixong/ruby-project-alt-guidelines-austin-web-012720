@@ -1,3 +1,4 @@
+
 class CommandLineInterface
   attr_accessor :cur_user
   def initialize
@@ -5,14 +6,16 @@ class CommandLineInterface
   end
   
   def run
-      greet
+    logo
+      # greet
       @cur_user = User.login_or_create_user
       puts " Hi #{cur_user.first_name} #{cur_user.last_name} !"
       main_menu
   end
   
   def greet
-      puts "\n\nDo512 - \"Do awesome stuff in Austin\"\n".colorize(:yellow ).colorize( :background => :light_blue)
+      puts "
+      \n\nDo512 - \"Do awesome stuff in Austin\"\n".colorize(:yellow ).colorize( :background => :light_blue)
   end
   
   def main_menu
@@ -137,5 +140,22 @@ class CommandLineInterface
     end
   end
 
+  def logo 
+    puts "
+                               
+    ooo.          oooooo .o .oPYo. 
+    8  `8.        8       8     `8 
+    8   `8 .oPYo. 8pPYo.  8    oP' 
+    8    8 8    8     `8  8 .oP'   
+    8   .P 8    8     .P  8 8'     
+    8ooo'  `YooP' `YooP'  8 8ooooo".colorize(:cyan) 
+    puts "
+    .....:::.....::.....::.........
+    :::::::::::::::::::::::::::::::
+    :::::::::::::::::::::::::::::::".colorize(:green)
+    puts '
+      "Do awesome stuff in Austin" '.colorize(:blue)
+    
+  end
 
 end
