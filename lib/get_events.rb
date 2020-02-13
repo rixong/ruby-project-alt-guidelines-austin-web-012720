@@ -85,11 +85,6 @@ class GetEvents
     time = split[1].slice(0,5)
   end
 
-
-
-
-
-
 end
 
 ## date query sample:  "https://do512.com/events/2020/02/10.json"

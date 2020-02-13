@@ -4,10 +4,7 @@ Bundler.require
 require 'open-uri'
 require 'net/http'
 require 'JSON'
-
 require "colorize"
-require 'io/console'
-require 'colorize'
 
 ActiveRecord::Base.logger = Logger.new(STDOUT)
 ActiveRecord::Base.logger.level = 1

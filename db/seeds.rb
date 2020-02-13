@@ -16,8 +16,8 @@ Event.create(title: "Warthog, Wiccans, Criaturas, Ninth Circle, Boofin Tylenol",
 
 
 Schedule.create(date: "01/11", event_id: 1, user_id: 1)
-Schedule.create(date: "01/11", event_id: 2, user_id: 1)
-Schedule.create(date: "01/11", event_id: 3, user_id: 1)
-Schedule.create(date: "01/11", event_id: 4, user_id: 2)
-Schedule.create(date: "01/11", event_id: 5, user_id: 2)
-Schedule.create(date: "01/11", event_id: 6, user_id: 2)
+Schedule.create(date: "01/12", event_id: 2, user_id: 1)
+Schedule.create(date: "01/13", event_id: 3, user_id: 1)
+Schedule.create(date: "01/14", event_id: 4, user_id: 2)
+Schedule.create(date: "01/15", event_id: 5, user_id: 2)
+Schedule.create(date: "01/16", event_id: 6, user_id: 2)
