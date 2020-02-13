@@ -63,32 +63,48 @@ class CommandLineInterface
     M - Main Menu"
     answer = gets.chomp
     case 
-    when answer == "1"
-      Schedule.make_schedule(date, result[index], cur_user)
-      main_menu
-    when answer == "2"
-      choose_by_date_menu
-    else
-      main_menu
+      when answer == "1"
+        Schedule.make_schedule(date, result[index], cur_user)
+        main_menu
+      when answer == "2"
+        choose_by_date_menu
+      else
+        main_menu
+      end
     end
-  end
   
   def schedule_menu
     puts "Make a selection:
             1. Print My Schedule
             2. Print a Friend's Schedule
             M - Main Menu"
-            response = gets.chomp
-              if response == "1"
-              Schedule.print_user_schedule(cur_user)
-              main_menu
-              elsif response == "2"
-                list_all_users_menu
-              else
-                choose_by_date_menu
-              end
-    puts "print user schedule menu"
-    main_menu
+    response = gets.chomp
+    if response == "1"
+      Schedule.print_user_schedule(cur_user.id)
+      puts "\n1. to delete event. 2. to go back:"  #input
+      response = gets.chomp
+      if response == '1'
+        puts " Enter the number of the event to delete:" #input choice
+        response = gets.chomp
+        Schedule.delete_schedule(cur_user, response.to_i)
+        main_menu
+      else
+        main_menu
+      end
+    else
+
+      # elsif response == "2"
+      #   User.list_users
+      # else
+      #   choose_by_date_menu
+      # end
+      puts "print friend's schedule"
+      User.list_users
+      puts "Choose friend:"
+      response = gets.chomp
+      Schedule.print_user_schedule(response)
+      main_menu
+    end
   end
 
   

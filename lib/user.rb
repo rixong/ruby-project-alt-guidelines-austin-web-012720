@@ -49,7 +49,7 @@ class User < ActiveRecord::Base
     puts "Enter your email:"
         email = gets.chomp
         prompt = TTY::Prompt.new 
-    password = prompt.mask("Enter a password:")  
+    password = prompt.mask("Enter a password:")
     user = User.create(first_name: first_name, last_name: last_name, email_address: email, password: password)
     puts "Saved! Welcome to Do512"
     return user
@@ -80,6 +80,6 @@ class User < ActiveRecord::Base
     User.all.each.with_index(1) do |user, index|
       puts "#{index}. #{user.first_name} #{user.last_name}"
     end
-   end
+  end
 
 end
