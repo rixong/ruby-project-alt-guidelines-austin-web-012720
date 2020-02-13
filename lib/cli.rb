@@ -7,16 +7,18 @@ class CommandLineInterface
   def run
       greet
       @cur_user = User.login_or_create_user
-      puts " Hi #{cur_user.first_name} #{cur_user.last_name} !"
       main_menu
   end
   
   def greet
-      puts "\n\nDo512 - \"Do awesome stuff in Austin\"\n".colorize(:yellow ).colorize( :background => :light_blue)
+      4.times do 
+        puts"\n" 
+      end
+      puts "\n\nDo512 - \"Do awesome stuff in Austin\"\n".colorize(:yellow)
   end
   
   def main_menu
-      puts "\nWhat would you like to do?".colorize(:green)
+      puts "\nMake a selection: ".colorize(:light_blue)
       puts "
       1. List Events by Date
       2. Schedules
@@ -43,24 +45,24 @@ class CommandLineInterface
   
   def choose_by_date_menu
     result = nil
-    puts "Enter a date to get started (mm/dd)"
+    puts "Enter a date to get started (mm/dd)".colorize(:blue)
     date = gets.chomp
     
     if !GetEvents.date_validation(date)  ## Validation  add to CLI
-      puts "Incorrect format."
+      puts "Incorrect format.".colorize(:red)
       choose_by_date_menu
     end
     
     result = GetEvents.get_api_by_date(date)
-    puts "\nHere are the events: #{date}:"
+    puts "\nHere are the events: #{date}:".colorize(:green)
     GetEvents.list_event_titles(result)
-    puts "\nChoose a number to see more info:"
+    puts "\nChoose a number to see more info:".colorize(:blue)
     index = gets.chomp.to_i - 1
     GetEvents.show_more_info(result[index])
     puts "Make a selection:
     1. Schedule this event
     2. View more events
-    M - Main Menu"
+    M - Main Menu".colorize(:blue)
     answer = gets.chomp
     case 
       when answer == "1"
@@ -77,16 +79,23 @@ class CommandLineInterface
     puts "Make a selection:
             1. Print My Schedule
             2. Print a Friend's Schedule
-            M - Main Menu"
+            M - Main Menu".colorize(:blue)
     response = gets.chomp
     if response == "1"
       Schedule.print_user_schedule(cur_user.id)
-      puts "\n1. to delete event. 2. to go back:"  #input
+      puts "\n1. Delete event. 2. Go back:".colorize(:blue)
       response = gets.chomp
       if response == '1'
-        puts " Enter the number of the event to delete:" #input choice
+        puts "Enter the number of the event to delete:".colorize(:blue)
         response = gets.chomp
-        Schedule.delete_schedule(cur_user, response.to_i)
+        puts "Are you sure? (y)".colorize(:magenta)
+        response = gets.chomp
+        if response == "y"
+          Schedule.delete_schedule(cur_user, response.to_i)
+          puts "Event deleted".colorize(:green)
+        else
+          puts "Event not deleted".colorize(:red)
+        end
         main_menu
       else
         main_menu
@@ -119,28 +128,28 @@ class CommandLineInterface
     1. Update Email Address
     2. Update Password
     3. Delete User
-    M - Main Menu"
+    M - Main Menu".colorize(:blue)
     answer = gets.chomp
     case  
       when answer == "1" 
-        puts "choice 1"
+        # puts "choice 1"
           User.update_email(cur_user)
       when answer == "2"
-        puts "choice 2"
+        # puts "choice 2"
           User.update_password(cur_user)
       when answer == "3"
-        puts "choice 3"
-        puts "Are you sure you want to delete this user? (Y/N)"
+        # puts "choice 3"
+        puts "Are you sure you want to delete this user??? (Y/N)".colorize(:red)
         choice = gets.chomp
         if choice.downcase == "y"
           User.delete_user(cur_user)
           run
         else
-          puts "User not deleted."
+          puts "User not deleted.".colorize(:yellow)
            settings_menu
         end
       else
-        puts "Invalid Entry: Enter a number."
+        puts "Invalid Entry: Enter a number.".colorize(:red)
     end
     main_menu
   end
@@ -149,7 +158,7 @@ class CommandLineInterface
     begin
       exit!
     rescue SystemExit
-      puts "Exiting Program"
+      puts "Goodbye...".colorize(:purple)
     end
   end
 

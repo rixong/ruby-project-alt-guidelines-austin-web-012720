@@ -17,8 +17,13 @@ class GetEvents
   def self.get_api_by_date(date)
     response_body = import_events_from_api("2020/#{date}")        ## "mm/dd"
     events = JSON.parse(response_body)["events"]  ## returns an array of events
-    events.map do |event| 
-      package_events(event)
+    if events                     ### new code
+      events.map do |event| 
+        package_events(event)
+      end
+    else
+      puts "There are no events for this date. Try another"
+      returns nil
     end
   end
 
@@ -35,14 +40,15 @@ class GetEvents
   
   def self.list_event_titles(events)
     events.each_with_index do |event, index|
-      puts "#{index + 1}. #{event.category.upcase} - #{event.title}"
+      puts "#{index + 1}. #{event.category} - #{event.title}"
     end
   end
 
   def self.show_more_info(event)
-    puts "Title: #{event.title}"
-    puts "Category: #{event.category}"
-    puts "Description: #{event.description}\n\n"
+    puts "\nTitle:  ".colorize(:cyan) + "#{event.title}".colorize(:light_blue)
+    puts "\nCategory  :".colorize(:cyan) + "#{event.category}".colorize(:light_blue)
+    puts "\nStart Time  :".colorize(:cyan) + "#{event.time}".colorize(:light_blue)
+    puts "\nDescription  :".colorize(:cyan) + "#{event.description}\n\n".colorize(:light_blue)
   end
   
 ### HELPER METHODS
