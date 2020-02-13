@@ -11,7 +11,7 @@ Install Instructions (for OS X)
  * In the Terminal, navigate to the “ATX-event-guide” directory
  * Run “bundle install”
  * Type “clear”
- * Run “ruby bin/run/rb”
+ * Run “ruby bin/run.rb”
 
 
  Usage
