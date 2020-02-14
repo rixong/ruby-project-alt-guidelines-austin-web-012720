@@ -8,11 +8,11 @@ User.create(first_name: "Bob", last_name: "Jones", email_address: "b", password:
 User.create(first_name: "Cathy", last_name: "Hale", email_address: "c", password: "c")
 
 Event.create(title: "BorderLaughs Comedy Vol. 6", date: "01/11", category: "Comedy", api_id: 11298330)
-Event.create(title: "Avery Moore (Live Album Recording)", date: "01/11", category: "Comedy", api_id: 11298330)
-Event.create(title: "lizabeth Spears with Andrew Clarkston", date: "01/11", category: "Comedy", api_id: 11350292)
-Event.create(title: "Free Week: Misery: The Film featuring Black Heart Saints", date: "01/12", category: "Music", api_id: 11431394)
-Event.create(title: "Downtown Comedy Night", date: "01/12", category: "Comedy", api_id: 11470245)
-Event.create(title: "Warthog, Wiccans, Criaturas, Ninth Circle, Boofin Tylenol", date: "01/12", category: "Music", api_id: 11411285)
+Event.create(title: "Avery Moore (Live Album Recording)", date: "01/12", category: "Comedy", api_id: 11298330)
+Event.create(title: "lizabeth Spears with Andrew Clarkston", date: "01/13", category: "Comedy", api_id: 11350292)
+Event.create(title: "Free Week: Misery: The Film featuring Black Heart Saints", date: "01/14", category: "Music", api_id: 11431394)
+Event.create(title: "Downtown Comedy Night", date: "01/15", category: "Comedy", api_id: 11470245)
+Event.create(title: "Warthog, Wiccans, Criaturas, Ninth Circle, Boofin Tylenol", date: "01/16", category: "Music", api_id: 11411285)
 
 
 Schedule.create(date: "01/11", event_id: 1, user_id: 1)
