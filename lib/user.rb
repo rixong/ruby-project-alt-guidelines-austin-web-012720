@@ -88,7 +88,7 @@ class User < ActiveRecord::Base
    end
 
    def self.delete_user(cur_user)
-    User.delete(cur_user)
+    User.destroy(cur_user.id)
     puts "Deleted current user".colorize(:magenta)
    end
 
