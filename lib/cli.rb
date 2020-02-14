@@ -11,7 +11,6 @@ class CommandLineInterface
   end
   
   def greet
-      
     puts "\n"
     puts "
     ooo.          oooooo .o .oPYo. 
@@ -52,7 +51,6 @@ class CommandLineInterface
       end
   end
 
-  
   def choose_by_date_menu
     result = nil
     puts "Enter a date (mm/dd): ".colorize(:cyan)
@@ -134,12 +132,10 @@ class CommandLineInterface
     end
   end
 
-  
   def list_all_users_menu
     User.list_users
     main_menu
   end
-  
 
   def settings_menu
     puts "\nSettings Menu:".colorize(:cyan)
@@ -177,6 +173,5 @@ class CommandLineInterface
       puts "Goodbye...".colorize(:purple)
     end
   end
-
 
 end
