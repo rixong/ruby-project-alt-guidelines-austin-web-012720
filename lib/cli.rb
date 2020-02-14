@@ -26,34 +26,36 @@ class CommandLineInterface
     puts '
       "Do awesome stuff in Austin" '.colorize(:blue)
   end
-  
+
   def main_menu
-    puts "\nMain Menu: ".colorize(:cyan)
-    puts "\t1. List Events by Date".colorize(:blue)
-    puts "\t2. Schedules".colorize(:blue)
-    puts "\t3. List All Users".colorize(:blue)
-    puts "\t4. Settings".colorize(:blue)
-    puts "\t5. Exit Program".colorize(:blue)
-    response = gets.chomp
-      case response
-        when "1"
-          choose_by_date_menu
-        when "2"
-          schedule_menu
-        when "3"
-          list_all_users_menu
-        when "4"
-          settings_menu
-        when "5"
-          exit_prompt
-        else
-          main_menu
-      end
+  prompt = TTY::Prompt.new(active_color: :cyan)
+    response = prompt.select("\nMain Menu") do |menu|
+      menu.choice " - List Events by Date"
+      menu.choice " - Schedules"
+      menu.choice " - List All Users"
+      menu.choice " - Settings"
+      menu.choice " - Exit Program"
+    end
+    case response
+      when " - List Events by Date"
+        choose_by_date_menu
+      when " - Schedules"
+        schedule_menu
+      when " - List All Users"
+        list_all_users_menu
+      when " - Settings"
+        settings_menu
+      when " - Exit Program"
+        exit_prompt
+      else
+        main_menu
+    end
   end
+
 
   def choose_by_date_menu
     result = nil
-    puts "Enter a date (mm/dd): ".colorize(:cyan)
+    puts "\nEnter a date (mm/dd): ".colorize(:cyan)
     date = gets.chomp
     
     if !GetEvents.date_validation(date)  ## Validation  add to CLI
@@ -67,45 +69,50 @@ class CommandLineInterface
     puts "\nChoose a number to see more info:".colorize(:cyan)
     index = gets.chomp.to_i - 1
     GetEvents.show_more_info(result[index])
-    puts "Event Menu:".colorize(:cyan)
-    puts "\t1. Schedule this event".colorize(:blue)
-    puts "\t2. View more events".colorize(:blue)
-    puts "\tM - Main Menu".colorize(:blue)
-    answer = gets.chomp
-    case answer
-      when "1"
-        Schedule.make_schedule(date, result[index], cur_user)
-        main_menu
-      when "2"
-        choose_by_date_menu
-      else
-        main_menu
-    end
-  end
-  
-  def schedule_menu
-    puts "\nSchedule Menu:".colorize(:cyan)
-    puts "\t1. View my Schedule".colorize(:blue)
-    puts "\t2. View a Friend's Schedule".colorize(:blue)
-    puts "\t3. Schedule an event".colorize(:blue)
-    puts "\tM. Main Menu".colorize(:blue)
-    response = gets.chomp
 
-    case response
-      when "1"
+    prompt = TTY::Prompt.new(active_color: :cyan)
+    response = prompt.select("\nEvent Menu") do |menu|
+      menu.choice " - Schedule this event"
+      menu.choice " - View more events"
+      menu.choice " - Main Menu"
+    end
+
+      case response
+        when " - Schedule this event"
+          Schedule.make_schedule(date, result[index], cur_user)
+          main_menu
+        when " - View more events"
+          choose_by_date_menu
+        else
+          main_menu
+      end
+  end
+
+  def schedule_menu
+    prompt = TTY::Prompt.new(active_color: :cyan)
+    answer = prompt.select("\nSchedule Menu:") do |menu|
+    menu.choice " - View my Schedule"
+    menu.choice " - View a Friend's Schedule"
+    menu.choice " - Schedule an event"
+    menu.choice " - Main Menu"
+    end
+
+    case answer
+      when " - View my Schedule"
         view_schedule
-      when "2"
+      when " - View a Friend's Schedule"
         User.list_users
         puts "\nChoose friend:".colorize(:blue)
         response = gets.chomp
         Schedule.print_user_schedule(response)
         main_menu
-      when "3"
+      when " - Schedule an event"
         choose_by_date_menu
         else 
           main_menu
     end
   end
+
 
   def view_schedule
     Schedule.print_user_schedule(cur_user.id)
@@ -138,20 +145,22 @@ class CommandLineInterface
   end
 
   def settings_menu
-    puts "\nSettings Menu:".colorize(:cyan)
-    puts "\t1. Update Email Address".colorize(:blue)
-    puts "\t2. Update Password".colorize(:blue)
-    puts "\t3. Delete User".colorize(:blue)
-    puts "\tM. Main Menu".colorize(:blue)
-    answer = gets.chomp
-    case answer
-      when "1" 
+    prompt = TTY::Prompt.new(active_color: :cyan)
+    response = prompt.select("\nSettings Menu") do |menu|
+      menu.choice " - Update Email Address"
+      menu.choice " - Update Password"
+      menu.choice " - Delete User"
+      menu.choice " - Main Menu"
+      end
+   
+    case response
+      when " - Update Email Address"
           User.update_email(cur_user)
           settings_menu
-      when "2"
+      when " - Update Password"
           User.update_password(cur_user)
           settings_menu
-      when "3"
+      when " - Delete User"
         puts "Are you sure you want to delete this user??? (Y/N)".colorize(:red)
         choice = gets.chomp
         if choice.downcase == "y"

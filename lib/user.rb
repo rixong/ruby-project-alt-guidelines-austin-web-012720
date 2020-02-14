@@ -6,17 +6,19 @@ class User < ActiveRecord::Base
   has_many :events, through: :schedules
 
   def self.login_or_create_user
-    puts "\nLogin Menu:".colorize(:cyan)
-    puts "\t1. Returning User - Login".colorize(:blue)
-    puts "\t2. New User - Create Profile".colorize(:blue)
-    selection = gets.chomp
-    if selection == "1"
-        User.enter_email
-    elsif selection == "2"
-        User.create_user
-    else
-      login_or_create_user
+   prompt = TTY::Prompt.new(active_color: :cyan)
+    selection = prompt.select("\nLogin Menu") do |menu|
+      menu.choice " - Returning User - Login"
+      menu.choice " - New User - Create Profile"
     end
+      case selection
+      when " - Returning User - Login"
+        User.enter_email
+      when " - New User - Create Profile"
+        User.create_user
+      else
+        login_or_create_user
+      end
   end
 
   def self.enter_email 
@@ -32,7 +34,7 @@ class User < ActiveRecord::Base
     end
 
   def self.enter_password(user)
-    prompt = TTY::Prompt.new
+    prompt = TTY::Prompt.new(active_color: :cyan)
     password = prompt.mask("Enter password: ".colorize(:cyan))
     # binding.pry
       if user.password == password
@@ -57,7 +59,7 @@ class User < ActiveRecord::Base
       break if validate_email(email)
     end
 
-    prompt = TTY::Prompt.new 
+    prompt = TTY::Prompt.new(active_color: :cyan) 
     password = prompt.mask("Enter a password: ".colorize(:cyan))
     user = User.create(first_name: first_name, last_name: last_name, email_address: email, password: password)
     puts "\nHi #{user.first_name}. Welcome to Do512!".colorize(:green)
@@ -82,7 +84,7 @@ class User < ActiveRecord::Base
    end
 
    def self.update_password(cur_user)
-    prompt = TTY::Prompt.new
+    prompt = TTY::Prompt.new(active_color: :cyan)
     password = prompt.mask("Enter a new password: ").colorize(:blue)
     cur_user.password = password
    end

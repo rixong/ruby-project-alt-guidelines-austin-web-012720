@@ -47,9 +47,9 @@ class GetEvents
 
   def self.show_more_info(event)
     puts "\nTitle: ".colorize(:yellow) + "#{event.title}".colorize(:green)
-    puts "\nCategory: ".colorize(:yellow) + "#{event.category}".colorize(:green)
-    puts "\nStart Time: ".colorize(:yellow) + "#{event.time}".colorize(:green)
-    puts "\nDescription: ".colorize(:yellow) + "#{event.description}\n\n".colorize(:green)
+    puts "Category: ".colorize(:yellow) + "#{event.category}".colorize(:green)
+    puts "Start Time: ".colorize(:yellow) + "#{event.time}".colorize(:green)
+    puts "Description: ".colorize(:yellow) + "#{event.description}\n\n".colorize(:green)
   end
   
 ### HELPER METHODS
